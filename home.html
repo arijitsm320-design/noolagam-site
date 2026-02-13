@@ -1,0 +1,2148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenXguard | Sugarfreelicious Verification Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #1a472a;
+            --secondary-green: #2e7d32;
+            --accent-green: #4caf50;
+            --light-green: #e8f5e9;
+            --dark-bg: #0d1f0f;
+            --text-dark: #2c3e2d;
+            --text-light: #5d6d5e;
+            --white: #ffffff;
+            --gold: #d4af37;
+            --gold-light: #f7efd9;
+            --blue: #2196f3;
+            --purple: #9c27b0;
+            --teal: #009688;
+            --shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            --radius: 16px;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            --gradient-primary: linear-gradient(135deg, var(--primary-green), var(--teal));
+            --gradient-gold: linear-gradient(135deg, var(--gold), #ffd700);
+            --gradient-rainbow: linear-gradient(135deg, #1a472a, #2e7d32, #4caf50, #009688, #2196f3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #f8fdf8 0%, #f0f7f0 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background Elements */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 15s infinite linear;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            background: var(--primary-green);
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            background: var(--accent-green);
+            top: 60%;
+            right: 10%;
+            animation-delay: 3s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            background: var(--gold);
+            bottom: 20%;
+            left: 15%;
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            33% {
+                transform: translateY(-30px) rotate(120deg);
+            }
+
+            66% {
+                transform: translateY(30px) rotate(240deg);
+            }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 3px solid transparent;
+            background: linear-gradient(white, white) padding-box,
+                var(--gradient-primary) border-box;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .brand-logo {
+            height: 45px;
+            transition: var(--transition);
+            filter: drop-shadow(0 5px 15px rgba(26, 71, 42, 0.2));
+        }
+
+        .brand-logo:hover {
+            transform: scale(1.05) rotate(5deg);
+            filter: drop-shadow(0 5px 20px rgba(26, 71, 42, 0.4));
+        }
+
+        .brand-divider {
+            color: var(--text-light);
+            font-size: 24px;
+            font-weight: 300;
+            opacity: 0.6;
+            animation: pulse 2s infinite;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 16px;
+            position: relative;
+            padding: 5px 0;
+            transition: var(--transition);
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-green);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 100px 0 80px;
+            background: linear-gradient(135deg, var(--light-green) 0%, #ffffff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--accent-green) 0%, transparent 70%);
+            opacity: 0.15;
+            border-radius: 50%;
+            animation: pulse-glow 4s infinite alternate;
+        }
+
+        .hero:after {
+            content: '';
+            position: absolute;
+            bottom: -200px;
+            left: -200px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+            opacity: 0.1;
+            border-radius: 50%;
+            animation: pulse-glow 4s infinite alternate-reverse;
+        }
+
+        @keyframes pulse-glow {
+            0% {
+                transform: scale(1);
+                opacity: 0.1;
+            }
+
+            100% {
+                transform: scale(1.2);
+                opacity: 0.2;
+            }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .verification-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 25px rgba(46, 125, 50, 0.3);
+            animation: pulse 2s infinite, float-badge 6s ease-in-out infinite;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+        }
+
+        .verification-badge:before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--gradient-rainbow);
+            border-radius: 50px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .verification-badge:hover:before {
+            opacity: 1;
+        }
+
+        @keyframes float-badge {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-bottom: 25px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: title-enter 1s ease-out;
+        }
+
+        @keyframes title-enter {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 auto 50px;
+            font-weight: 300;
+            animation: subtitle-enter 1s ease-out 0.3s both;
+        }
+
+        @keyframes subtitle-enter {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 60px;
+            flex-wrap: wrap;
+            animation: stats-enter 1s ease-out 0.6s both;
+        }
+
+        @keyframes stats-enter {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stat-item {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            min-width: 180px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-item:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--secondary-green);
+            display: block;
+            line-height: 1;
+            margin-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            animation: count-up 2s ease-out;
+        }
+
+        @keyframes count-up {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            font-weight: 500;
+            background: var(--gold-light);
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        /* Verification Summary */
+        .verification-summary {
+            padding: 100px 0;
+            background: var(--white);
+            position: relative;
+        }
+
+        .verification-summary:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--gradient-rainbow);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+            background: var(--gold-light);
+            border-radius: 15px;
+            border-left: 4px solid var(--gold);
+        }
+
+        .verification-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .verification-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            animation: card-float 6s ease-in-out infinite;
+        }
+
+        .verification-card:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .verification-card:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        .verification-card:nth-child(4) {
+            animation-delay: 1.5s;
+        }
+
+        @keyframes card-float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .verification-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--gradient-primary);
+        }
+
+        .verification-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .verification-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--light-green);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            font-size: 32px;
+            color: var(--secondary-green);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .verification-icon:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .verification-card:hover .verification-icon {
+            background: var(--gradient-primary);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .verification-card:hover .verification-icon:before {
+            opacity: 0.1;
+        }
+
+        .verification-card h3 {
+            font-size: 1.8rem;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+            transition: var(--transition);
+        }
+
+        .verification-card:hover h3 {
+            color: var(--secondary-green);
+        }
+
+        .verification-card p {
+            color: var(--text-light);
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+        }
+
+        .verification-score {
+            display: inline-block;
+            padding: 8px 20px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(46, 125, 50, 0.2);
+            transition: var(--transition);
+        }
+
+        .verification-card:hover .verification-score {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(46, 125, 50, 0.3);
+        }
+
+        /* Evidence Vault */
+        .evidence-section {
+            padding: 100px 0;
+            background: linear-gradient(180deg, var(--white) 0%, var(--light-green) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .evidence-section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--teal) 0%, transparent 70%);
+            opacity: 0.1;
+            border-radius: 50%;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .evidence-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .evidence-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 50px 40px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(46, 125, 50, 0.1);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            animation: evidence-enter 0.8s ease-out;
+        }
+
+        @keyframes evidence-enter {
+            from {
+                opacity: 0;
+                transform: translateY(50px) rotateX(-30deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) rotateX(0);
+            }
+        }
+
+        .evidence-card:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .evidence-card:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .evidence-card:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        .evidence-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(26, 71, 42, 0.2);
+            border-color: var(--accent-green);
+        }
+
+        .evidence-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-gold);
+            border-radius: 0 0 0 40px;
+            transition: var(--transition);
+        }
+
+        .evidence-card:hover::after {
+            width: 60px;
+            height: 60px;
+        }
+
+        .evidence-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--light-green);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: var(--primary-green);
+            margin-bottom: 30px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .evidence-icon:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .evidence-card:hover .evidence-icon {
+            background: var(--gradient-primary);
+            color: var(--white);
+            transform: rotateY(180deg) scale(1.1);
+        }
+
+        .evidence-card:hover .evidence-icon:before {
+            opacity: 0.2;
+        }
+
+        .evidence-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+
+        .evidence-card:hover h3 {
+            color: var(--teal);
+            transform: translateX(10px);
+        }
+
+        .evidence-card p {
+            color: var(--text-light);
+            font-size: 1.05rem;
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+
+        .evidence-features {
+            list-style: none;
+            margin-bottom: 35px;
+            padding: 20px;
+            background: linear-gradient(135deg, #fcfdfc 0%, #f0f7f0 100%);
+            border-radius: 12px;
+            border-left: 4px solid var(--accent-green);
+            transition: var(--transition);
+        }
+
+        .evidence-card:hover .evidence-features {
+            transform: translateX(10px);
+            box-shadow: inset 5px 0 0 var(--gold);
+        }
+
+        .evidence-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            transition: var(--transition);
+        }
+
+        .evidence-features li:hover {
+            color: var(--primary-green);
+            transform: translateX(5px);
+        }
+
+        .evidence-features li:last-child {
+            margin-bottom: 0;
+        }
+
+        .evidence-features i {
+            color: var(--secondary-green);
+            width: 20px;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .evidence-features li:hover i {
+            color: var(--gold);
+            transform: scale(1.2);
+        }
+
+        .evidence-features strong {
+            color: var(--primary-green);
+            font-weight: 600;
+        }
+
+        /* Evidence Buttons Container */
+        .evidence-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .evidence-btn {
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            background: var(--gradient-primary);
+            color: white;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .evidence-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+            z-index: -1;
+        }
+
+        .evidence-btn:hover:before {
+            left: 100%;
+        }
+
+        .evidence-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(26, 71, 42, 0.3);
+            background: var(--gradient-rainbow);
+        }
+
+        .evidence-btn i {
+            transition: var(--transition);
+        }
+
+        .evidence-btn:hover i {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        /* Download Report Button */
+        .download-report-btn {
+            background: var(--gradient-gold);
+            border: 2px solid var(--gold);
+        }
+
+        .download-report-btn:hover {
+            background: linear-gradient(135deg, #ffd700, var(--gold));
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Download Modal */
+        .download-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                backdrop-filter: blur(0);
+            }
+
+            to {
+                opacity: 1;
+                backdrop-filter: blur(10px);
+            }
+        }
+
+        .download-modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 100%;
+            padding: 40px;
+            position: relative;
+            animation: modalSlideIn 0.4s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            background: var(--light-green);
+            color: var(--primary-green);
+            transform: rotate(90deg);
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .modal-header i {
+            font-size: 48px;
+            color: var(--secondary-green);
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        .modal-header h3 {
+            color: var(--primary-green);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .modal-header p {
+            color: var(--text-light);
+        }
+
+        .download-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .download-option {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: var(--light-green);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .download-option:hover {
+            transform: translateX(10px);
+            background: var(--white);
+            border-color: var(--accent-green);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .download-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .download-info h4 {
+            color: var(--primary-green);
+            margin-bottom: 5px;
+        }
+
+        .download-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: var(--light-green);
+            border-radius: 2px;
+            margin-top: 10px;
+            overflow: hidden;
+            display: none;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            width: 0%;
+            transition: width 2s ease;
+            border-radius: 2px;
+        }
+
+        /* Methodology */
+        .methodology-section {
+            padding: 100px 0;
+            background: var(--gradient-primary);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .methodology-section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: cover;
+            animation: wave 20s linear infinite;
+        }
+
+        @keyframes wave {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 100% 100%;
+            }
+        }
+
+        .methodology-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .methodology-steps:before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: rgba(255, 255, 255, 0.2);
+            animation: line-glow 2s infinite alternate;
+        }
+
+        @keyframes line-glow {
+            from {
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            }
+
+            to {
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+            }
+        }
+
+        .method-step {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+            position: relative;
+            animation: step-enter 0.6s ease-out;
+        }
+
+        @keyframes step-enter {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+            transition: var(--transition);
+            animation: step-pulse 2s infinite;
+        }
+
+        @keyframes step-pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 5px 25px rgba(212, 175, 55, 0.6);
+            }
+        }
+
+        .method-step:hover .step-number {
+            transform: scale(1.1) rotate(360deg);
+            background: var(--gradient-gold);
+        }
+
+        .step-content {
+            flex: 1;
+            padding-top: 15px;
+            transition: var(--transition);
+        }
+
+        .method-step:hover .step-content {
+            transform: translateX(10px);
+        }
+
+        .step-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--white);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .step-content p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Partner Section */
+        .partner-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary-green) 0%, #1e3a24 100%);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .partner-section:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+
+        .partner-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: var(--radius);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature i {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #a8d5ba;
+            transition: var(--transition);
+        }
+
+        .feature:hover i {
+            transform: scale(1.2) rotate(10deg);
+            color: var(--gold);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--primary-green) 0%, #0d1f0f 100%);
+            color: var(--white);
+            padding: 80px 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--gradient-rainbow);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-link:hover:before {
+            opacity: 1;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+            padding-left: 10px;
+            transform: scale(1.05);
+        }
+
+        /* Particle Animation */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--accent-green);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: particle-float 20s infinite linear;
+        }
+
+        @keyframes particle-float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-stats {
+                gap: 20px;
+            }
+
+            .stat-item {
+                min-width: 150px;
+                padding: 20px;
+            }
+
+            .partner-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .evidence-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .evidence-buttons {
+                flex-direction: column;
+            }
+
+            .download-modal-content {
+                padding: 30px 20px;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--light-green);
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-primary);
+            border-radius: 6px;
+            border: 3px solid var(--light-green);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gradient-rainbow);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Animated Background Elements -->
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+
+    <!-- Particle Animation -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Download Modal -->
+    <div class="download-modal" id="downloadModal">
+        <div class="download-modal-content">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <div class="modal-header">
+                <i class="fas fa-file-download"></i>
+                <h3 id="modalTitle">Download Report</h3>
+                <p id="modalDescription">Select format and download your report</p>
+            </div>
+            <div class="download-options">
+                <div class="download-option" data-format="pdf">
+                    <div class="download-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <div class="download-info">
+                        <h4>PDF Document</h4>
+                        <p>High-quality printable document (5-10 MB)</p>
+                    </div>
+                </div>
+                <div class="download-option" data-format="excel">
+                    <div class="download-icon">
+                        <i class="fas fa-file-excel"></i>
+                    </div>
+                    <div class="download-info">
+                        <h4>Excel Spreadsheet</h4>
+                        <p>Full data with analysis (2-5 MB)</p>
+                    </div>
+                </div>
+                <div class="download-option" data-format="summary">
+                    <div class="download-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="download-info">
+                        <h4>Executive Summary</h4>
+                        <p>Key findings only (1-2 MB)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="progress-bar" id="progressBar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="brand-container">
+                    <img src="logo.jpeg" alt="GreenXguard" class="brand-logo">
+                    <span class="brand-divider">×</span>
+                    <img src="https://www.sundariihandmade.com/cdn/shop/files/Sundarii_logo_2-removebg-preview.png?v=1722848717&amp;width=523"
+                        alt="Sugarfreelicious" class="brand-logo">
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#verification">Verification</a></li>
+                    <li><a href="#evidence">Evidence</a></li>
+                    <li><a href="#research">Research</a></li>
+                    <li><a href="#methodology">Methodology</a></li>
+                    <li><a href="#about">Partnership</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="verification-badge">
+                    <i class="fas fa-shield-check"></i>
+                    GreenXguard Verified Partner
+                </div>
+                <h1 class="hero-title">Digital Verification Portal</h1>
+                <p class="hero-subtitle">
+                    Independent audit results and scientific verification of Sundarii Handmade's sustainability claims,
+                    conducted by GreenXguard's digital fortress monitoring system.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">98.7%</span>
+                        <span class="stat-label">Overall Compliance Score</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Live Monitoring</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">0</span>
+                        <span class="stat-label">Compliance Violations</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Verification Summary -->
+    <section class="verification-summary" id="verification">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Verification Summary</h2>
+                <p class="section-subtitle">
+                    Comprehensive audit results based on GreenXguard's 360° compliance framework
+                </p>
+            </div>
+            <div class="verification-grid">
+                <div class="verification-card">
+                    <div class="verification-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Sustainability & Circularity</h3>
+                    <p>Assessment of environmental impact, packaging lifecycle, and waste management systems.</p>
+                    <div class="verification-score">Score: 96.2%</div>
+                </div>
+                <div class="verification-card">
+                    <div class="verification-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3>Product Purity</h3>
+                    <p>Scientific verification of environmental claims through accredited laboratory testing
+                        and material composition analysis.</p>
+                    <div class="verification-score">Score: 98.5%</div>
+                </div>
+                <div class="verification-card">
+                    <div class="verification-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3>Supply Chain Transparency</h3>
+                    <p>Traceability from raw materials to finished products with blockchain verification.</p>
+                    <div class="verification-score">Score: 95.8%</div>
+                </div>
+                <div class="verification-card">
+                    <div class="verification-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Regulatory Compliance</h3>
+                    <p>Adherence to 2026 CCPA requirements, and international standards.</p>
+                    <div class="verification-score">Score: 91.3%</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Evidence Vault -->
+    <section class="evidence-section" id="evidence">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">The Evidence Vault</h2>
+                <p class="section-subtitle">
+                    Three pillars of verified artisan integrity, backed by ISO 14021 and NABL-accredited data
+                </p>
+            </div>
+            <div class="evidence-grid">
+                <div class="evidence-card">
+                    <div class="evidence-icon">
+                        <i class="fas fa-passport"></i>
+                    </div>
+                    <h3>Digital Origin Passport</h3>
+                    <p>
+                        Blockchain-verified traceability from artisan clusters to finished product.
+                        Each textile carries a unique digital identity certifying its heritage.
+                    </p>
+                    <ul class="evidence-features">
+                        <li><i class="fas fa-map-marker-alt"></i> <strong>Artisan Clusters:</strong> 12 verified across
+                            India</li>
+                        <li><i class="fas fa-hands"></i> <strong>Hand-Block Process:</strong> 100% manual craftsmanship
+                        </li>
+                        <li><i class="fas fa-qrcode"></i> <strong>Digital ID:</strong> Scan to verify origin</li>
+                    </ul>
+                    <div class="evidence-buttons">
+                        <button class="evidence-btn view-map-btn" data-report="origin-passport">
+                            <i class="fas fa-map"></i> View Artisan Cluster Map
+                        </button>
+                        <button class="evidence-btn download-report-btn" data-report="origin-passport">
+                            <i class="fas fa-download"></i> Download Origin Passport Report
+                        </button>
+                    </div>
+                </div>
+
+                <div class="evidence-card">
+                    <div class="evidence-icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <h3>ISO 14021 Technical Dossier</h3>
+                    <p>
+                        Scientific verification of environmental claims through accredited laboratory testing
+                        and material composition analysis.
+                    </p>
+                    <ul class="evidence-features">
+                        <li><i class="fas fa-check-circle"></i> <strong>NABL AZO-Free Certified:</strong> Batch
+                            #SL-2026-042</li>
+                        <li><i class="fas fa-leaf"></i> <strong>Natural Dye Disclosure:</strong> 94% plant-based
+                            pigments</li>
+                        <li><i class="fas fa-flask"></i> <strong>Heavy Metal Tested:</strong> Below detection limits
+                        </li>
+                    </ul>
+                    <div class="evidence-buttons">
+                        <button class="evidence-btn view-lab-btn" data-report="iso-dossier">
+                            <i class="fas fa-microscope"></i> View Lab Reports
+                        </button>
+                        <button class="evidence-btn download-report-btn" data-report="iso-dossier">
+                            <i class="fas fa-download"></i> Download Technical Dossier
+                        </button>
+                    </div>
+                </div>
+
+                <div class="evidence-card">
+                    <div class="evidence-icon">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+                    <h3>Mass Balance Circularity Ledger</h3>
+                    <p>
+                        Real-time tracking of material flows, waste diversion, and circular economy metrics
+                        across the production ecosystem.
+                    </p>
+                    <ul class="evidence-features">
+                        <li><i class="fas fa-ban"></i> <strong>No-Waste Policy:</strong> Zero landfill commitment</li>
+                        <li><i class="fas fa-threads"></i> <strong>Fabric Repurposed:</strong> 87% of offcuts utilized
+                        </li>
+                        <li><i class="fas fa-water"></i> <strong>Water Recycling:</strong> 92% process water treated
+                        </li>
+                    </ul>
+                    <div class="evidence-buttons">
+                        <button class="evidence-btn view-waste-btn" data-report="circularity-ledger">
+                            <i class="fas fa-chart-bar"></i> View Waste Audit
+                        </button>
+                        <button class="evidence-btn download-report-btn" data-report="circularity-ledger">
+                            <i class="fas fa-download"></i> Download Circularity Report
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodology -->
+    <section class="methodology-section" id="methodology">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Verification Methodology</h2>
+                <p class="section-subtitle">
+                    How GreenXguard ensures scientific accuracy in sustainability verification
+                </p>
+            </div>
+            <div class="methodology-steps">
+                <div class="method-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Digital Footprint Analysis</h3>
+                        <p>
+                            Comprehensive scanning of public claims, marketing materials, and regulatory
+                            filings to establish baseline for verification.
+                        </p>
+                    </div>
+                </div>
+                <div class="method-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Laboratory Verification</h3>
+                        <p>
+                            Independent testing at NABL-accredited facilities to verify product claims
+                            including Sustainable, Eco-friendly and safety parameters.
+                        </p>
+                    </div>
+                </div>
+                <div class="method-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Supply Chain Auditing</h3>
+                        <p>
+                            Physical and digital verification of supply chain partners, raw material
+                            sourcing, and manufacturing processes using blockchain technology.
+                        </p>
+                    </div>
+                </div>
+                <div class="method-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Continuous Monitoring</h3>
+                        <p>
+                            24/7 digital surveillance of compliance parameters with real-time alerts
+                            and monthly verification reports to ensure ongoing adherence.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compliance Partner -->
+    <section class="partner-section" id="about">
+        <div class="container">
+            <div class="partner-content">
+                <div class="partner-info">
+                    <h2>Compliance Partner</h2>
+                    <div class="partner-intro">
+                        <p>
+                            <strong>Sundarii Handmade is a GreenXguard Verified Partner.</strong> We have partnered with
+                            GreenXguard to implement a 360° compliance audit. Unlike traditional brands that 'buy
+                            logos,' we 'own our data.' Our partnership ensures that every claim on this website is
+                            scientifically substantiated and 2026-CCPA ready.
+                        </p>
+                    </div>
+
+                    <div class="partner-features">
+                        <div class="feature">
+                            <i class="fas fa-database"></i>
+                            <h4>Data Ownership</h4>
+                            <p>We own our compliance data, not just license, certification & logos.</p>
+                        </div>
+
+                        <div class="feature">
+                            <i class="fas fa-chart-bar"></i>
+                            <h4>Real-Time Monitoring</h4>
+                            <p>24/7 surveillance of supply chain and production metrics.</p>
+                        </div>
+
+                        <div class="feature">
+                            <i class="fas fa-gavel"></i>
+                            <h4>Regulatory Ready</h4>
+                            <p>Prepared for 2026 CCPA guidelines and global compliance standards.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="partner-visual">
+                    <div class="visual-card"
+                        style="background: rgba(255,255,255,0.1); padding: 30px; border-radius: var(--radius); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);">
+                        <div class="visual-header">
+                            <h4><i class="fas fa-shield-alt"></i> GreenXguard Digital Fortress</h4>
+                            <div class="visual-status">
+                                <span class="status-dot active"></span>
+                                <span>Active Protection</span>
+                            </div>
+                        </div>
+
+                        <div class="visual-metrics"
+                            style="display: flex; justify-content: space-around; margin: 30px 0;">
+                            <div class="visual-metric">
+                                <div class="metric-circle" data-value="100"
+                                    style="position: relative; width: 80px; height: 80px; margin: 0 auto 15px;">
+                                    <svg width="80" height="80">
+                                        <circle cx="40" cy="40" r="35" stroke="rgba(255,255,255,0.2)" stroke-width="8"
+                                            fill="none"></circle>
+                                        <circle cx="40" cy="40" r="35" stroke="#a8d5ba" stroke-width="8" fill="none"
+                                            stroke-linecap="round" stroke-dasharray="219.8" stroke-dashoffset="0">
+                                        </circle>
+                                    </svg>
+                                    <span
+                                        style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 1.5rem; font-weight: 700; color: white;">100%</span>
+                                </div>
+                                <p>Claim Accuracy</p>
+                            </div>
+
+                            <div class="visual-metric">
+                                <div class="metric-circle" data-value="28"
+                                    style="position: relative; width: 80px; height: 80px; margin: 0 auto 15px;">
+                                    <svg width="80" height="80">
+                                        <circle cx="40" cy="40" r="35" stroke="rgba(255,255,255,0.2)" stroke-width="8"
+                                            fill="none"></circle>
+                                        <circle cx="40" cy="40" r="35" stroke="#a8d5ba" stroke-width="8" fill="none"
+                                            stroke-linecap="round" stroke-dasharray="219.8" stroke-dashoffset="158.256">
+                                        </circle>
+                                    </svg>
+                                    <span
+                                        style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 1.5rem; font-weight: 700; color: white;">28</span>
+                                </div>
+                                <p>Continuous Audit Days</p>
+                            </div>
+                        </div>
+
+                        <div class="visual-footer"
+                            style="text-align: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2);">
+                            <p><i class="fas fa-key"></i> Verification ID: SNH-GXG-2026-002</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="brand-container">
+                        <img src="logo.png" alt="GreenXguard" class="footer-logo" style="height: 40px;">
+                        <span class="brand-divider" style="color: rgba(255,255,255,0.5);">×</span>
+                        <img src="https://www.sundariihandmade.com/cdn/shop/files/Sundarii_logo_2-removebg-preview.png?v=1722848717&amp;width=523"
+                            alt="Sugarfreelicious" class="footer-logo" style="height: 40px;">
+                    </div>
+                    <p class="footer-tagline">
+                        GreenXguard provides independent digital verification services for sustainable D2C brands.
+                        This portal contains verified audit results for Sundarii Handmade's sustainability claims.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="footer-heading"
+                        style="font-size: 1.3rem; color: white; margin-bottom: 25px; font-weight: 600;">Verification
+                        Categories</h3>
+                    <ul class="footer-links" style="list-style: none;">
+                        <li><a href="https://greenxguard.vercel.app/">Sustainability Claims</a></li>
+                        <li><a href="https://greenxguard.vercel.app/">Product Purity</a></li>
+                        <li><a href="https://greenxguard.vercel.app/">Supply Chain</a></li>
+                        <li><a href="https://greenxguard.vercel.app/">Regulatory Compliance</a></li>
+                        <li><a href="https://greenxguard.vercel.app/">Health & Safety</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-heading"
+                        style="font-size: 1.3rem; color: white; margin-bottom: 25px; font-weight: 600;">Resources</h3>
+                    <ul class="footer-links" style="list-style: none;">
+                        <li><a href="https://greenxguard.vercel.app/">Audit Methodology</a></li>
+                        <li><a href="https://greenxguard.vercel.app/">Research Papers</a></li>
+                        <li><a href="https://greenxguard.vercel.app/">Compliance Standards</a></li>
+                        <li><a href="https://greenxguard.vercel.app/">Verification FAQ</a></li>
+                        <li><a href="https://greenxguard.vercel.app/">Data Privacy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-heading"
+                        style="font-size: 1.3rem; color: white; margin-bottom: 25px; font-weight: 600;">Contact Audit
+                        Team</h3>
+                    <ul class="footer-links" style="list-style: none;">
+                        <li><i class="fas fa-envelope"></i> contact.greenxguard@gmail.com</li>
+                        <li><i class="fas fa-phone"></i> +91 82409 47366</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Kolkata, India</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri, 9AM-6PM IST</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom"
+                style="text-align: center; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); font-size: 0.9rem;">
+                <p>&copy; 2025 GreenXguard Digital Verification Services. All audit results are independently verified
+                    and updated monthly.</p>
+                <p> Last Updated: January 2026</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+
+                // Random properties
+                const size = Math.random() * 10 + 5;
+                const left = Math.random() * 100;
+                const duration = Math.random() * 20 + 10;
+                const delay = Math.random() * 20;
+                const color = Math.random() > 0.5 ? '#4caf50' : '#d4af37';
+
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${left}%`;
+                particle.style.background = color;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Animate elements on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.verification-card, .evidence-card, .method-step, .feature, .stat-item');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            elements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+        // Animate numbers counting up
+        function animateNumbers() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+
+            statNumbers.forEach(stat => {
+                const target = parseFloat(stat.textContent);
+                const duration = 2000;
+                const steps = 60;
+                const increment = target / steps;
+                let current = 0;
+
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        stat.textContent = stat.textContent.includes('%') ? target.toFixed(1) + '%' : target;
+                        clearInterval(timer);
+                    } else {
+                        stat.textContent = stat.textContent.includes('%') ? current.toFixed(1) + '%' : Math.floor(current);
+                    }
+                }, duration / steps);
+            });
+        }
+
+        // Download Report Functionality
+        function setupDownloadButtons() {
+            const downloadButtons = document.querySelectorAll('.download-report-btn');
+            const viewButtons = document.querySelectorAll('.evidence-btn:not(.download-report-btn)');
+            const downloadModal = document.getElementById('downloadModal');
+            const closeModal = document.getElementById('closeModal');
+            const progressBar = document.getElementById('progressBar');
+            const progressFill = progressBar.querySelector('.progress-fill');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDescription = document.getElementById('modalDescription');
+            const downloadOptions = document.querySelectorAll('.download-option');
+
+            let currentReport = '';
+
+            // Report titles and descriptions
+            const reportData = {
+                'origin-passport': {
+                    title: 'Digital Origin Passport Report',
+                    description: 'Blockchain-verified traceability report for artisan clusters'
+                },
+                'iso-dossier': {
+                    title: 'ISO 14021 Technical Dossier',
+                    description: 'Complete laboratory test results and compliance documentation'
+                },
+                'circularity-ledger': {
+                    title: 'Circularity Ledger Report',
+                    description: 'Mass balance and waste audit report for circular economy metrics'
+                }
+            };
+
+            // Open download modal
+            downloadButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    currentReport = button.dataset.report;
+
+                    if (reportData[currentReport]) {
+                        modalTitle.textContent = reportData[currentReport].title;
+                        modalDescription.textContent = reportData[currentReport].description;
+                    }
+
+                    downloadModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            // View buttons functionality (example implementations)
+            viewButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const report = button.dataset.report;
+                    const reportInfo = reportData[report];
+
+                    if (reportInfo) {
+                        alert(`Opening ${reportInfo.title} viewer...\n\nThis would normally open an interactive viewer or map.`);
+
+                        // Example animations for view buttons
+                        button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+                        setTimeout(() => {
+                            button.innerHTML = '<i class="fas fa-check"></i> Loaded Successfully';
+                            setTimeout(() => {
+                                button.innerHTML = button.getAttribute('data-original-text') ||
+                                    (report === 'origin-passport' ? '<i class="fas fa-map"></i> View Artisan Cluster Map' :
+                                        report === 'iso-dossier' ? '<i class="fas fa-microscope"></i> View Lab Reports' :
+                                            '<i class="fas fa-chart-bar"></i> View Waste Audit');
+                            }, 1500);
+                        }, 2000);
+                    }
+                });
+
+                // Store original text
+                button.setAttribute('data-original-text', button.innerHTML);
+            });
+
+            // Close modal
+            closeModal.addEventListener('click', () => {
+                downloadModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                progressBar.style.display = 'none';
+                progressFill.style.width = '0%';
+            });
+
+            // Close modal when clicking outside
+            downloadModal.addEventListener('click', (e) => {
+                if (e.target === downloadModal) {
+                    downloadModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    progressBar.style.display = 'none';
+                    progressFill.style.width = '0%';
+                }
+            });
+
+            // Handle download option selection
+            downloadOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    const format = option.dataset.format;
+                    const formatName = option.querySelector('h4').textContent;
+
+                    // Show progress bar
+                    progressBar.style.display = 'block';
+
+                    // Simulate download progress
+                    let progress = 0;
+                    const interval = setInterval(() => {
+                        progress += 2;
+                        progressFill.style.width = progress + '%';
+
+                        if (progress >= 100) {
+                            clearInterval(interval);
+
+                            // Show success message
+                            setTimeout(() => {
+                                alert(`✅ Download Complete!\n\n${reportData[currentReport].title}\nFormat: ${formatName}\nFile has been downloaded successfully.`);
+
+                                // Reset modal
+                                setTimeout(() => {
+                                    downloadModal.style.display = 'none';
+                                    document.body.style.overflow = 'auto';
+                                    progressBar.style.display = 'none';
+                                    progressFill.style.width = '0%';
+                                }, 500);
+                            }, 500);
+                        }
+                    }, 30);
+
+                    // Add visual feedback to the selected option
+                    option.style.background = 'var(--light-green)';
+                    option.style.borderColor = 'var(--accent-green)';
+
+                    setTimeout(() => {
+                        option.style.background = '';
+                        option.style.borderColor = '';
+                    }, 3000);
+                });
+            });
+
+            // Add keyboard support
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && downloadModal.style.display === 'flex') {
+                    downloadModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            animateOnScroll();
+            animateNumbers();
+            setupDownloadButtons();
+
+            console.log('Enhanced GreenXguard Verification Portal loaded');
+        });
+
+        // Simulate live data updates
+        setInterval(() => {
+            const stats = document.querySelectorAll('.stat-number');
+            if (stats.length >= 3) {
+                // Randomly update the compliance score slightly
+                const scoreElement = stats[0];
+                let currentScore = parseFloat(scoreElement.textContent);
+                const variation = (Math.random() - 0.5) * 0.1;
+                const newScore = Math.min(99.9, Math.max(98.5, currentScore + variation));
+
+                if (Math.random() > 0.8) { // 20% chance to update
+                    scoreElement.textContent = newScore.toFixed(1) + '%';
+                    scoreElement.style.animation = 'none';
+                    void scoreElement.offsetWidth; // Trigger reflow
+                    scoreElement.style.animation = 'count-up 0.5s ease-out';
+                }
+            }
+        }, 5000);
+
+        // Add scroll progress indicator
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+
+            document.documentElement.style.setProperty('--scroll-progress', `${scrolled}%`);
+        });
+    </script>
+</body>
+
+</html>
