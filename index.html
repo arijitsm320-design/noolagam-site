@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GreenXguard | Sugarfreelicious Verification Portal</title>
+    <title>GreenXguard | Digital Verification Portal</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
@@ -13,16 +13,16 @@
         rel="stylesheet">
     <style>
         :root {
-            --primary-green: #1a472a;
-            --secondary-green: #2e7d32;
-            --accent-green: #4caf50;
-            --light-green: #e8f5e9;
+            --primary-green: #2dce05;
+            --secondary-green: #06930d;
+            --accent-green: #00af55;
+            --light-green: #ffffff;
             --dark-bg: #0d1f0f;
             --text-dark: #2c3e2d;
             --text-light: #5d6d5e;
             --white: #ffffff;
             --gold: #d4af37;
-            --gold-light: #f7efd9;
+            --gold-light: #f9db88;
             --blue: #2196f3;
             --purple: #9c27b0;
             --teal: #009688;
@@ -32,6 +32,9 @@
             --gradient-primary: linear-gradient(135deg, var(--primary-green), var(--teal));
             --gradient-gold: linear-gradient(135deg, var(--gold), #ffd700);
             --gradient-rainbow: linear-gradient(135deg, #1a472a, #2e7d32, #4caf50, #009688, #2196f3);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --scroll-progress: 0%;
         }
 
         * {
@@ -44,9 +47,21 @@
             font-family: 'Poppins', sans-serif;
             line-height: 1.7;
             color: var(--text-dark);
-            background: linear-gradient(135deg, #f8fdf8 0%, #f0f7f0 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
             min-height: 100vh;
             overflow-x: hidden;
+        }
+
+        /* Scroll Progress Indicator */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: var(--scroll-progress);
+            height: 4px;
+            background: var(--gradient-primary);
+            z-index: 9999;
+            transition: width 0.1s ease;
         }
 
         /* Animated Background Elements */
@@ -146,7 +161,6 @@
         .brand-logo {
             height: 45px;
             transition: var(--transition);
-            filter: drop-shadow(0 5px 15px rgba(26, 71, 42, 0.2));
         }
 
         .brand-logo:hover {
@@ -159,7 +173,6 @@
             font-size: 24px;
             font-weight: 300;
             opacity: 0.6;
-            animation: pulse 2s infinite;
         }
 
         .nav-links {
@@ -269,22 +282,16 @@
             position: relative;
         }
 
-        .verification-badge:before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: var(--gradient-rainbow);
-            border-radius: 50px;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
+        @keyframes pulse {
 
-        .verification-badge:hover:before {
-            opacity: 1;
+            0%,
+            100% {
+                box-shadow: 0 10px 25px rgba(46, 125, 50, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 10px 30px rgba(46, 125, 50, 0.5);
+            }
         }
 
         @keyframes float-badge {
@@ -374,6 +381,8 @@
             min-width: 180px;
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
         }
 
         .stat-item:before {
@@ -496,6 +505,7 @@
             position: relative;
             overflow: hidden;
             animation: card-float 6s ease-in-out infinite;
+            backdrop-filter: blur(10px);
         }
 
         .verification-card:nth-child(2) {
@@ -549,30 +559,12 @@
             font-size: 32px;
             color: var(--secondary-green);
             transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .verification-icon:before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: var(--gradient-primary);
-            opacity: 0;
-            transition: opacity 0.3s ease;
         }
 
         .verification-card:hover .verification-icon {
             background: var(--gradient-primary);
             color: white;
             transform: rotateY(180deg);
-        }
-
-        .verification-card:hover .verification-icon:before {
-            opacity: 0.1;
         }
 
         .verification-card h3 {
@@ -720,30 +712,12 @@
             color: var(--primary-green);
             margin-bottom: 30px;
             transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .evidence-icon:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient-primary);
-            opacity: 0;
-            transition: opacity 0.3s ease;
         }
 
         .evidence-card:hover .evidence-icon {
             background: var(--gradient-primary);
             color: var(--white);
             transform: rotateY(180deg) scale(1.1);
-        }
-
-        .evidence-card:hover .evidence-icon:before {
-            opacity: 0.2;
         }
 
         .evidence-card h3 {
@@ -1219,6 +1193,32 @@
             z-index: 1;
         }
 
+        .partner-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 30px;
+            color: var(--white);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .partner-intro {
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .partner-intro strong {
+            color: var(--gold);
+        }
+
+        .partner-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 40px;
+        }
+
         .feature {
             background: rgba(255, 255, 255, 0.1);
             padding: 25px;
@@ -1244,6 +1244,122 @@
 
         .feature:hover i {
             transform: scale(1.2) rotate(10deg);
+            color: var(--gold);
+        }
+
+        .feature h4 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--white);
+        }
+
+        .feature p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+        }
+
+        .partner-visual {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: var(--radius);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .visual-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .visual-header h4 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--white);
+            font-size: 1.3rem;
+        }
+
+        .visual-header i {
+            color: var(--gold);
+        }
+
+        .visual-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #a8d5ba;
+            font-size: 0.9rem;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #4caf50;
+            box-shadow: 0 0 10px #4caf50;
+        }
+
+        .status-dot.active {
+            animation: pulse 2s infinite;
+        }
+
+        .visual-metrics {
+            display: flex;
+            justify-content: space-around;
+            margin: 40px 0;
+        }
+
+        .visual-metric {
+            text-align: center;
+        }
+
+        .metric-circle {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px;
+        }
+
+        .metric-circle svg {
+            transform: rotate(-90deg);
+        }
+
+        .metric-circle circle {
+            fill: none;
+            stroke-width: 8;
+            stroke-linecap: round;
+        }
+
+        .metric-value {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .visual-metric p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        .visual-footer {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            color: #a8d5ba;
+            font-size: 0.9rem;
+        }
+
+        .visual-footer i {
+            margin-right: 8px;
             color: var(--gold);
         }
 
@@ -1273,6 +1389,21 @@
             margin-bottom: 60px;
             position: relative;
             z-index: 1;
+        }
+
+        .footer-brand .brand-container {
+            margin-bottom: 25px;
+        }
+
+        .footer-tagline {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
         }
 
         .social-link {
@@ -1311,17 +1442,48 @@
             opacity: 1;
         }
 
-        .footer-links a {
+        .footer-heading {
+            font-size: 1.3rem;
+            color: var(--white);
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a,
+        .footer-links li {
             color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
             transition: var(--transition);
             display: inline-block;
         }
 
-        .footer-links a:hover {
+        .footer-links a:hover,
+        .footer-links li:hover {
             color: var(--gold);
             padding-left: 10px;
             transform: scale(1.05);
+        }
+
+        .footer-links i {
+            margin-right: 10px;
+            width: 20px;
+            color: var(--gold);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
         }
 
         /* Particle Animation */
@@ -1362,6 +1524,15 @@
             .section-title {
                 font-size: 2.5rem;
             }
+
+            .partner-content {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .partner-features {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 768px) {
@@ -1378,17 +1549,29 @@
                 padding: 20px;
             }
 
-            .partner-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
+            .nav-links {
+                display: none;
             }
 
             .evidence-grid {
                 grid-template-columns: 1fr;
             }
 
-            .evidence-buttons {
+            .verification-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .partner-features {
+                grid-template-columns: 1fr;
+            }
+
+            .partner-visual {
+                padding: 30px 20px;
+            }
+
+            .visual-metrics {
                 flex-direction: column;
+                gap: 30px;
             }
 
             .download-modal-content {
@@ -1419,6 +1602,9 @@
 </head>
 
 <body>
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress"></div>
+
     <!-- Animated Background Elements -->
     <div class="floating-elements">
         <div class="floating-element"></div>
@@ -1480,15 +1666,15 @@
                 <div class="brand-container">
                     <img src="logo.jpeg" alt="GreenXguard" class="brand-logo">
                     <span class="brand-divider">×</span>
-                    <img src="https://www.sundariihandmade.com/cdn/shop/files/Sundarii_logo_2-removebg-preview.png?v=1722848717&amp;width=523"
-                        alt="Sugarfreelicious" class="brand-logo">
+                    <img src="https://static.wixstatic.com/media/b283ba_42362759512d43978d948f29d317e1f9~mv2.png/v1/crop/x_84,y_0,w_304,h_142/fill/w_265,h_124,fp_0.50_0.50,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/NOOLAGAM%20%20LABEL.png%22%20alt=%22NOOLAGAM%20%20LABEL.png"
+                        alt="Noolagam" class="brand-logo">
                 </div>
                 <ul class="nav-links">
                     <li><a href="#verification">Verification</a></li>
                     <li><a href="#evidence">Evidence</a></li>
-                    <li><a href="#research">Research</a></li>
                     <li><a href="#methodology">Methodology</a></li>
                     <li><a href="#about">Partnership</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -1504,7 +1690,7 @@
                 </div>
                 <h1 class="hero-title">Digital Verification Portal</h1>
                 <p class="hero-subtitle">
-                    Independent audit results and scientific verification of Sundarii Handmade's sustainability claims,
+                    Independent audit results and scientific verification of brand sustainability claims,
                     conducted by GreenXguard's digital fortress monitoring system.
                 </p>
                 <div class="hero-stats">
@@ -1565,7 +1751,7 @@
                         <i class="fas fa-shield-alt"></i>
                     </div>
                     <h3>Regulatory Compliance</h3>
-                    <p>Adherence to 2026 CCPA requirements, and international standards.</p>
+                    <p>Adherence to 2026 CCPA requirements, EU Green Claims Directive, and international standards.</p>
                     <div class="verification-score">Score: 91.3%</div>
                 </div>
             </div>
@@ -1588,7 +1774,7 @@
                     </div>
                     <h3>Digital Origin Passport</h3>
                     <p>
-                        Blockchain-verified traceability from artisan clusters to finished product.
+                        Digitally-verified traceability from artisan clusters to finished product.
                         Each textile carries a unique digital identity certifying its heritage.
                     </p>
                     <ul class="evidence-features">
@@ -1690,7 +1876,7 @@
                         <h3>Laboratory Verification</h3>
                         <p>
                             Independent testing at NABL-accredited facilities to verify product claims
-                            including Sustainable, Eco-friendly and safety parameters.
+                            including chemical composition, biodegradability, and safety parameters.
                         </p>
                     </div>
                 </div>
@@ -1726,10 +1912,12 @@
                     <h2>Compliance Partner</h2>
                     <div class="partner-intro">
                         <p>
-                            <strong>Sundarii Handmade is a GreenXguard Verified Partner.</strong> We have partnered with
+                            <strong>Our brand is a GreenXguard Verified Partner.</strong> We have partnered with
                             GreenXguard to implement a 360° compliance audit. Unlike traditional brands that 'buy
-                            logos,' we 'own our data.' Our partnership ensures that every claim on this website is
-                            scientifically substantiated and 2026-CCPA ready.
+                            logos,'
+                            we 'own our data.' Our partnership ensures that every claim on this website is
+                            scientifically
+                            substantiated and 2026-CCPA ready.
                         </p>
                     </div>
 
@@ -1737,7 +1925,7 @@
                         <div class="feature">
                             <i class="fas fa-database"></i>
                             <h4>Data Ownership</h4>
-                            <p>We own our compliance data, not just license, certification & logos.</p>
+                            <p>We own our compliance data, not just license certification logos.</p>
                         </div>
 
                         <div class="feature">
@@ -1755,55 +1943,45 @@
                 </div>
 
                 <div class="partner-visual">
-                    <div class="visual-card"
-                        style="background: rgba(255,255,255,0.1); padding: 30px; border-radius: var(--radius); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);">
-                        <div class="visual-header">
-                            <h4><i class="fas fa-shield-alt"></i> GreenXguard Digital Fortress</h4>
-                            <div class="visual-status">
-                                <span class="status-dot active"></span>
-                                <span>Active Protection</span>
+                    <div class="visual-header">
+                        <h4><i class="fas fa-shield-alt"></i> GreenXguard Digital Fortress</h4>
+                        <div class="visual-status">
+                            <span class="status-dot active"></span>
+                            <span>Active Protection</span>
+                        </div>
+                    </div>
+
+                    <div class="visual-metrics">
+                        <div class="visual-metric">
+                            <div class="metric-circle" data-value="100">
+                                <svg width="80" height="80">
+                                    <circle cx="40" cy="40" r="35" stroke="rgba(255,255,255,0.2)" stroke-width="8"
+                                        fill="none"></circle>
+                                    <circle cx="40" cy="40" r="35" stroke="#a8d5ba" stroke-width="8" fill="none"
+                                        stroke-linecap="round" stroke-dasharray="219.8" stroke-dashoffset="0"></circle>
+                                </svg>
+                                <span class="metric-value">100%</span>
                             </div>
+                            <p>Claim Accuracy</p>
                         </div>
 
-                        <div class="visual-metrics"
-                            style="display: flex; justify-content: space-around; margin: 30px 0;">
-                            <div class="visual-metric">
-                                <div class="metric-circle" data-value="100"
-                                    style="position: relative; width: 80px; height: 80px; margin: 0 auto 15px;">
-                                    <svg width="80" height="80">
-                                        <circle cx="40" cy="40" r="35" stroke="rgba(255,255,255,0.2)" stroke-width="8"
-                                            fill="none"></circle>
-                                        <circle cx="40" cy="40" r="35" stroke="#a8d5ba" stroke-width="8" fill="none"
-                                            stroke-linecap="round" stroke-dasharray="219.8" stroke-dashoffset="0">
-                                        </circle>
-                                    </svg>
-                                    <span
-                                        style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 1.5rem; font-weight: 700; color: white;">100%</span>
-                                </div>
-                                <p>Claim Accuracy</p>
+                        <div class="visual-metric">
+                            <div class="metric-circle" data-value="28">
+                                <svg width="80" height="80">
+                                    <circle cx="40" cy="40" r="35" stroke="rgba(255,255,255,0.2)" stroke-width="8"
+                                        fill="none"></circle>
+                                    <circle cx="40" cy="40" r="35" stroke="#a8d5ba" stroke-width="8" fill="none"
+                                        stroke-linecap="round" stroke-dasharray="219.8" stroke-dashoffset="158.256">
+                                    </circle>
+                                </svg>
+                                <span class="metric-value">28</span>
                             </div>
-
-                            <div class="visual-metric">
-                                <div class="metric-circle" data-value="28"
-                                    style="position: relative; width: 80px; height: 80px; margin: 0 auto 15px;">
-                                    <svg width="80" height="80">
-                                        <circle cx="40" cy="40" r="35" stroke="rgba(255,255,255,0.2)" stroke-width="8"
-                                            fill="none"></circle>
-                                        <circle cx="40" cy="40" r="35" stroke="#a8d5ba" stroke-width="8" fill="none"
-                                            stroke-linecap="round" stroke-dasharray="219.8" stroke-dashoffset="158.256">
-                                        </circle>
-                                    </svg>
-                                    <span
-                                        style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 1.5rem; font-weight: 700; color: white;">28</span>
-                                </div>
-                                <p>Continuous Audit Days</p>
-                            </div>
+                            <p>Continuous Audit Days</p>
                         </div>
+                    </div>
 
-                        <div class="visual-footer"
-                            style="text-align: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2);">
-                            <p><i class="fas fa-key"></i> Verification ID: SNH-GXG-2026-002</p>
-                        </div>
+                    <div class="visual-footer">
+                        <p><i class="fas fa-key"></i> Verification ID: BRAND-GXG-2026-002</p>
                     </div>
                 </div>
             </div>
@@ -1816,60 +1994,55 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <div class="brand-container">
-                        <img src="logo.png" alt="GreenXguard" class="footer-logo" style="height: 40px;">
-                        <span class="brand-divider" style="color: rgba(255,255,255,0.5);">×</span>
-                        <img src="https://www.sundariihandmade.com/cdn/shop/files/Sundarii_logo_2-removebg-preview.png?v=1722848717&amp;width=523"
-                            alt="Sugarfreelicious" class="footer-logo" style="height: 40px;">
+                        <img src="logo.png" alt="GreenXguard" class="brand-logo">
+                        <span class="brand-divider">×</span>
+                        <img src="https://static.wixstatic.com/media/b283ba_42362759512d43978d948f29d317e1f9~mv2.png/v1/crop/x_84,y_0,w_304,h_142/fill/w_265,h_124,fp_0.50_0.50,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/NOOLAGAM%20%20LABEL.png%22%20alt=%22NOOLAGAM%20%20LABEL.png"
+                            alt="Noolagam" class="brand-logo">
                     </div>
                     <p class="footer-tagline">
                         GreenXguard provides independent digital verification services for sustainable D2C brands.
-                        This portal contains verified audit results for Sundarii Handmade's sustainability claims.
+                        This portal contains verified audit results for our partner brand's sustainability claims.
                     </p>
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-file-contract"></i></a>
                     </div>
                 </div>
                 <div>
-                    <h3 class="footer-heading"
-                        style="font-size: 1.3rem; color: white; margin-bottom: 25px; font-weight: 600;">Verification
-                        Categories</h3>
-                    <ul class="footer-links" style="list-style: none;">
-                        <li><a href="https://greenxguard.vercel.app/">Sustainability Claims</a></li>
-                        <li><a href="https://greenxguard.vercel.app/">Product Purity</a></li>
-                        <li><a href="https://greenxguard.vercel.app/">Supply Chain</a></li>
-                        <li><a href="https://greenxguard.vercel.app/">Regulatory Compliance</a></li>
-                        <li><a href="https://greenxguard.vercel.app/">Health & Safety</a></li>
+                    <h3 class="footer-heading">Verification Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Sustainability Claims</a></li>
+                        <li><a href="#">Product Purity</a></li>
+                        <li><a href="#">Supply Chain</a></li>
+                        <li><a href="#">Regulatory Compliance</a></li>
+                        <li><a href="#">Health & Safety</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="footer-heading"
-                        style="font-size: 1.3rem; color: white; margin-bottom: 25px; font-weight: 600;">Resources</h3>
-                    <ul class="footer-links" style="list-style: none;">
-                        <li><a href="https://greenxguard.vercel.app/">Audit Methodology</a></li>
-                        <li><a href="https://greenxguard.vercel.app/">Research Papers</a></li>
-                        <li><a href="https://greenxguard.vercel.app/">Compliance Standards</a></li>
-                        <li><a href="https://greenxguard.vercel.app/">Verification FAQ</a></li>
-                        <li><a href="https://greenxguard.vercel.app/">Data Privacy</a></li>
+                    <h3 class="footer-heading">Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Audit Methodology</a></li>
+                        <li><a href="#">Research Papers</a></li>
+                        <li><a href="#">Compliance Standards</a></li>
+                        <li><a href="#">Verification FAQ</a></li>
+                        <li><a href="#">Data Privacy</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="footer-heading"
-                        style="font-size: 1.3rem; color: white; margin-bottom: 25px; font-weight: 600;">Contact Audit
-                        Team</h3>
-                    <ul class="footer-links" style="list-style: none;">
-                        <li><i class="fas fa-envelope"></i> contact.greenxguard@gmail.com</li>
-                        <li><i class="fas fa-phone"></i> +91 82409 47366</li>
-                        <li><i class="fas fa-map-marker-alt"></i> Kolkata, India</li>
-                        <li><i class="fas fa-clock"></i> Mon-Fri, 9AM-6PM IST</li>
-                    </ul>
+                    <!-- <h3 class="footer-heading">Contact Audit Team</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> contact@greenxguard.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> San Francisco, CA</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri, 9AM-6PM PST</li>
+                    </ul> -->
                 </div>
             </div>
-            <div class="footer-bottom"
-                style="text-align: center; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); font-size: 0.9rem;">
+            <div class="footer-bottom">
                 <p>&copy; 2025 GreenXguard Digital Verification Services. All audit results are independently verified
                     and updated monthly.</p>
-                <p> Last Updated: January 2026</p>
+                <p>Last Updated: January 2026 | Version: 2.1.0</p>
             </div>
         </div>
     </footer>
@@ -2141,6 +2314,7 @@
             const scrolled = (winScroll / height) * 100;
 
             document.documentElement.style.setProperty('--scroll-progress', `${scrolled}%`);
+            document.querySelector('.scroll-progress').style.width = `${scrolled}%`;
         });
     </script>
 </body>
